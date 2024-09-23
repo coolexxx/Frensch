@@ -77,13 +77,14 @@ vocab_of_the_day = [
 
 
 def generate_exercise(level, topic, grammar):
-    prompt = f"""Generiere eine Französisch-Übung für das Niveau {level} zum Thema '{topic}' mit Fokus auf die Grammatik '{grammar}'.
-    Die Übung sollte aus folgenden Teilen bestehen:
-    1. Eine kurze Einleitung oder Kontext (auf Deutsch)
-    2. 5 Sätze auf Französisch, bei denen jeweils ein Wort oder eine Phrase fehlt. Markiere die Lücke mit _____.
-    3. Die korrekten Antworten für jede Lücke, einschließlich möglicher Alternativen.
+    prompt = f"""Generate a French exercise for level {level} on the topic ‘{topic}’ with a focus on the grammar ‘{grammar}’.
+    The exercise should consist of the following parts:
+    1. a short introduction or context (in German)
+    2. 5 sentences in French, each with a missing word or phrase. Mark the gap with _____.
+    3. the correct answers for each gap, including possible alternatives.
+    4. focus on maintaining the level and grammar.
 
-    Bitte formatiere die Ausgabe so:
+    Please format the output like this:
     Einleitung: [Einleitungstext]
 
     Übung:
@@ -103,7 +104,7 @@ def generate_exercise(level, topic, grammar):
 
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": "Du bist ein hilfreicher Französischlehrer, der Übungen erstellt."},
                 {"role": "user", "content": prompt}
@@ -135,7 +136,7 @@ def check_answers(user_answers, correct_answers, level):
 
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             messages=[
                 {"role": "system",
                  "content": "Du bist ein erfahrener Französischlehrer, der Schülerantworten bewertet."},
